@@ -1,7 +1,13 @@
-setwd("C:/Coursera/Exploratory Data Analysis/Week1/Project1")
+## Download file
+
+temp <- tempfile()
+download.file("https://archive.ics.uci.edu/ml/machine-learning-databases/00235/household_power_consumption.zip",temp)
 
 ##Reading data
-householdpowerconsumption <- read.table("household_power_consumption.txt", header=TRUE, sep = ";",na.strings = "?", nrows = 2075260, quote = "", col.names = c("Date","Time","Global_active_power","Global_reactive_power","Voltage","Global_intensity","Sub_metering_1","Sub_metering_2","Sub_metering_3"))
+
+householdpowerconsumption <- read.table(unz(temp, "household_power_consumption.txt"),header=TRUE, sep = ";",na.strings = "?", nrows = 2075260, quote = "", col.names = c("Date","Time","Global_active_power","Global_reactive_power","Voltage","Global_intensity","Sub_metering_1","Sub_metering_2","Sub_metering_3"))
+
+unlink(temp)
 
 ##Getting rid of the first row which contains the names of the columns
 householdpowerconsumption<- householdpowerconsumption[-1,]
